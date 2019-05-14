@@ -2,10 +2,12 @@ package primeira.versao;
 
 public class Aluguel {
 	private Festa festa;
+	private Cliente cliente;
 
-	public Aluguel(Festa festa) {
+	public Aluguel(Festa festa, Cliente cliente) {
 		super();
 		this.festa = festa;
+		this.cliente = cliente;
 	}
 
 	public Festa getFesta() {
@@ -17,8 +19,9 @@ public class Aluguel {
 	}
 
 	public double calculaValorRealDoAluguel() {
-		// regras para o desconto
-		return 0;
+		if (cliente.isClienteAntigo())
+			return festa.getTemaEscolhido().getValorDoAluguel() * 0.95;
+		return festa.getTemaEscolhido().getValorDoAluguel();
 	}
 
 }
