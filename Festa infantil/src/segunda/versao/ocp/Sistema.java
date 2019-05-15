@@ -1,13 +1,13 @@
-package primeira.versao;
+package segunda.versao.ocp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import segunda.versao.ocp.Festa;
-import segunda.versao.ocp.ItemDoTema;
-import segunda.versao.ocp.TemaDeFestaInfantil;
+import primeira.versao.Festa;
+import primeira.versao.ItemDoTema;
+import primeira.versao.TemaDeFestaInfantil;
 
 public class Sistema {
 	public static void main(String[] args) {
@@ -30,8 +30,17 @@ public class Sistema {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		Aluguel aluguel = new Aluguel(festa, cliente);
-		cliente.setAluguel(aluguel);
-		System.out.println(cliente.getAluguel().calculaValorRealDoAluguel());
+		CalculadoraDeDescontos desconto=null;
+		if(cliente.quantidadeDeAlugueisRealizados()>10)
+			desconto = new DescontoParaClientesComMaisDeDezAlugueis();
+		else if(cliente.quantidadeDeAlugueisRealizados()>5)
+			desconto = new DescontoParaClientesComMaisDeCincoAlugueis();
+		else if(cliente.isClienteAntigo())
+			desconto=new DescontoParaClienteAntigo();
+		else
+			desconto=new ValorAluguelSemDesconto();
+		Aluguel aluguel = new Aluguel(festa, cliente, desconto);
+		cliente.alugaTema(aluguel);
+		System.out.println(aluguel.calculaValorRealDoAluguel());
 	}
 }

@@ -1,5 +1,7 @@
 package primeira.versao;
 
+import segunda.versao.ocp.Festa;
+
 public class Aluguel {
 	private Festa festa;
 	private Cliente cliente;
