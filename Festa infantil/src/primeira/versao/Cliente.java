@@ -28,4 +28,9 @@ public class Cliente {
 		return clienteAntigo;
 	}
 
+	public Aluguel getAluguel() {
+		return aluguel;
+	}
+	
+
 }
